@@ -8,19 +8,19 @@ A sleek, responsive, and secure PHP-based blogging platform featuring a premium 
 
 ### 🏠 Home Page
 The public landing page showcasing the latest featured articles and categories.
-![Home Page](public/screenshots/home.jpeg)
+![Home Page](devblog/public/screenshots/home.jpeg)
 
 ### ⚡ Hero Section
 A bold, high-impact hero area designed to grab user attention immediately.
-![Hero Section](public/screenshots/hero.jpeg)
+![Hero Section](devblog/public/screenshots/hero.jpeg)
 
 ### 👥 User Management
 An administrative interface for managing users, roles (Admin/User), and account statuses.
-![Users Page](public/screenshots/users.jpeg)
+![Users Page](devblog/public/screenshots/users.jpeg)
 
 ### 📊 System Reports & Analytics
 Advanced reporting tool with date filtering, author activity tracking, and CSV export functionality.
-![Reports Page](public/screenshots/report.jpeg)
+![Reports Page](devblog/public/screenshots/report.jpeg)
 
 ---
 

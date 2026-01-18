@@ -1,0 +1,447 @@
+/* =========================================
+   1. GLOBAL STYLES & TYPOGRAPHY
+   ========================================= */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    line-height: 1.6;
+    padding-top: 72px; /* Offset for fixed nav */
+}
+
+a { text-decoration: none; color: inherit; }
+
+.gradient-text {
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* =========================================
+   2. NAVIGATION BAR (Glassmorphism)
+   ========================================= */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1050;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo { font-size: 22px; font-weight: 800; color: #4f46e5; }
+.tagline { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+
+.navbar .nav-link {
+    font-weight: 500;
+    color: #0f172a;
+    padding: 6px 12px;
+    transition: color 0.2s ease;
+}
+
+.navbar .nav-link:hover { color: #4f46e5; }
+
+.brand-icon {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.brand-icon i { width: 18px; height: 18px; color: #4f46e5; stroke-width: 2.5; }
+
+/* =========================================
+   3. BUTTONS
+   ========================================= */
+.btn {
+    display: inline-block;
+    padding: 12px 26px;
+    background: white;
+    color: #4338ca;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.navbar .btn-primary {
+    background: linear-gradient(135deg, #6366f1, #4338ca);
+    color: white !important;
+    padding: 10px 22px;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+}
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: white;
+    padding: 100px 20px 140px;
+    margin-bottom: 40px;
+}
+
+.hero-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+.hero p { font-size: 18px; opacity: 0.9; max-width: 500px; margin-bottom: 30px; }
+.hero-image img { width: 100%; max-width: 500px; animation: float 6s ease-in-out infinite; }
+
+.badge {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   5. BENTO FEATURES (Floating Icon Style)
+   ========================================= */
+.features-section { padding: 100px 20px; background: #fcfcfc; }
+.features-container { max-width: 1100px; margin: auto; text-align: center; }
+
+.features-title { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+.features-subtitle { color: #64748b; font-size: 18px; margin-bottom: 60px; }
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+}
+
+.bento-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.bento-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+}
+
+.card-large { grid-column: span 7; min-height: 280px; }
+.card-small { grid-column: span 5; }
+
+.card-content h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; color: #0f172a; }
+.card-content p { color: #64748b; font-size: 15px; line-height: 1.6; max-width: 90%; }
+
+/* The Floating Watermark Icons */
+.bento-bg-icon {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 160px !important;
+    height: 160px !important;
+    opacity: 0.05; /* Very subtle watermark */
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+/* Small icons for the top of cards */
+.card-icon-top {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    color: white;
+}
+.card-icon-top i { width: 22px; height: 22px; stroke-width: 2.5; }
+
+/* Colors */
+.blue   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.green  { background: linear-gradient(135deg, #22c55e, #16a34a); }
+.orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+
+
+/* Section Layout */
+.how-section-split {
+  padding: 150px 20px;
+  background: #ffffff;
+}
+
+.split-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Left Side: Sticky Sidebar */
+.split-sidebar {
+  position: sticky;
+  top: 120px; /* Adjust based on your navbar height */
+}
+
+.split-title {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 20px 0;
+  color: #0f172a;
+}
+
+.split-desc {
+  font-size: 18px;
+  color: #64748b;
+  max-width: 380px;
+}
+
+/* Right Side: Step Styles */
+.modern-step {
+  margin-bottom: 40px;
+  padding: 50px;
+  background: #f8fafc;
+  border-radius: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.modern-step:hover {
+  background: #ffffff;
+  transform: scale(1.02);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06);
+  border-color: rgba(99, 102, 241, 0.1);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.step-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-family: monospace;
+}
+
+.modern-step h4 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modern-step p {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991px) {
+  .split-wrapper {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  
+  .split-sidebar {
+    position: relative;
+    top: 0;
+    text-align: center;
+  }
+  
+  .split-desc {
+    margin: 0 auto;
+  }
+
+  .modern-step {
+    padding: 30px;
+  }
+  
+  .split-title {
+    font-size: 38px;
+  }
+}
+
+
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+.footer {
+    background: #6366f1;
+    color: #eef0f2;
+    padding: 80px 20px 40px;
+}
+footer-copy{
+  text-align: center !important;
+}
+.footer-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+.footer a { display: block; margin-bottom: 10px; font-size: 14px; transition: 0.2s; text-align: ; }
+.footer a:hover { color: #6366f1; }
+
+/* =========================================
+   7. RESPONSIVENESS
+   ========================================= */
+@media (max-width: 991px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero h1 { font-size: 38px; }
+    .hero p { margin: 0 auto 30px; }
+    
+    .card-large, .card-small { grid-column: span 12; padding: 35px; }
+    .bento-bg-icon { width: 120px !important; height: 120px !important; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+
+/* =========================================
+   LATEST BLOGS: INDIGO BRUTALIST
+   ========================================= */
+
+.latest-blogs-brutal {
+    padding: 100px 20px;
+    background-color: #0f112a; /* Matching your hero background color */
+    color: #ffffff;
+}
+
+.blog-header {
+    margin-bottom: 60px;
+}
+
+/* Grid using the zero-gap structural feel */
+.brutal-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0px; 
+    border: 2px solid #1e293b;
+}
+
+.brutal-blog-card {
+    background: #0f112a;
+    border: 1px solid #1e293b;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    min-height: 350px;
+}
+
+/* Interactive Hover */
+.brutal-blog-card:hover {
+    background: #16193a;
+    z-index: 2;
+    border-color: #6366f1;
+    box-shadow: 10px 10px 0px #4f46e5; /* Brand Indigo Hard Shadow */
+    transform: translate(-5px, -5px);
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.blog-date {
+    font-family: monospace;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.brutal-blog-card h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.brutal-blog-card p {
+    color: #cbd5e1;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.blog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1e293b;
+    padding-top: 20px;
+}
+
+.author {
+    font-family: monospace;
+    font-size: 14px;
+    color: #6366f1;
+}
+
+.read-btn {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.brutal-blog-card:hover .read-btn {
+    color: #6366f1;
+}
+
+@media (max-width: 768px) {
+    .brutal-blog-grid { border: none; }
+    .brutal-blog-card { border-bottom: 1px solid #1e293b; }
+}

@@ -1,65 +1,55 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../app/config/database.php"; 
+// Go up two levels to reach the root, then into app/config
+require_once __DIR__ . "/../../app/config/database.php";
 
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
-    header("Location: ../../login.php"); exit();
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$current_user = $_SESSION['user_name'] ?? null;
+
+$stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$post = $stmt->get_result()->fetch_assoc();
+
+if (!$post || ($post['author'] !== $current_user && $_SESSION['user_role'] !== 'admin')) {
+    die("Unauthorized.");
 }
 
-$id = $_GET['id'];
-$post = $conn->query("SELECT * FROM posts WHERE id = $id")->fetch_assoc();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $author = $_POST['author'];
-
-    $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, author = ? WHERE id = ?");
-    $stmt->bind_param("sssi", $title, $content, $author, $id);
+    $update = $conn->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ?");
+    $update->bind_param("ssi", $title, $content, $id);
     
-    if ($stmt->execute()) {
-        header("Location: list.php?status=updated");
+    if ($update->execute()) {
+        // Redirect back to the blog list in the public folder
+        header("Location: ../../public/blog.php");
         exit();
     }
 }
+
+// Go up one level to reach views, then layouts
+include __DIR__ . "/../layouts/header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Post | DEVBLOG</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/admin.css">
-</head>
-<body style="background: #f4f7fe; font-family: 'Plus Jakarta Sans', sans-serif;">
-
-    <?php require_once __DIR__ . "/../layouts/admin_sidebar.php"; ?>
-
-    <main class="main-content">
-        <div class="container-fluid px-4 py-4">
-            <h2 class="fw-bold h4 mb-4">Edit Post</h2>
-            <div class="card border-0 shadow-sm p-4" style="border-radius: 24px;">
-                <form action="" method="POST">
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Title</label>
-                        <input type="text" name="title" class="form-control bg-light border-0" value="<?= htmlspecialchars($post['title']) ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Author</label>
-                        <input type="text" name="author" class="form-control bg-light border-0" value="<?= htmlspecialchars($post['author']) ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Content</label>
-                        <textarea name="content" class="form-control bg-light border-0" rows="8" required><?= htmlspecialchars($post['content']) ?></textarea>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary px-5 rounded-pill">Update Changes</button>
-                        <a href="list.php" class="btn btn-light px-4 rounded-pill">Back</a>
-                    </div>
-                </form>
-            </div>
+<div class="container py-5 mt-5">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            <h2 class="fw-bold mb-4">Edit Log</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Title</label>
+                    <input type="text" name="title" class="form-control" value="<?= htmlspecialchars($post['title']) ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Content</label>
+                    <textarea name="content" class="form-control" rows="8" required><?= htmlspecialchars($post['content']) ?></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Post</button>
+                <a href="../../public/blog.php" class="btn btn-light border">Cancel</a>
+            </form>
         </div>
-    </main>
-</body>
-</html>
+    </div>
+</div>
+
+<?php include __DIR__ . "/../layouts/footer.php"; ?>

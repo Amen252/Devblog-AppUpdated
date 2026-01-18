@@ -37,6 +37,12 @@ $blog_base  = "/devblog/public/views/blog";
                     <i class="fas fa-comment-dots"></i> <span>Messages</span>
                 </a>
             </li>
+
+            <li>
+                <a href="<?= $admin_base ?>/report.php">
+                    <i class="fas fa-chart-line"></i> <span>System Report</span>
+                </a>
+            </li>
         </ul>
     </nav>
 
